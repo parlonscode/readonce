@@ -34,9 +34,9 @@ class MessagesController extends AbstractController
     }
 
     #[Route(
-        '/messages/{id}',
+        '/messages/{uuid}',
         requirements: [
-            'id' => Requirement::POSITIVE_INT
+            'uuid' => Requirement::UUID_V7
         ],
         name: 'app_messages_show',
         methods: ['GET']
