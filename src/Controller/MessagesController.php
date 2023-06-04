@@ -27,6 +27,8 @@ class MessagesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $message->setCreatedAt(new \DateTimeImmutable);
+            $message->setUpdatedAt(new \DateTimeImmutable);
             $messageRepository->save($message, flush: true);
 
             dd('done');
