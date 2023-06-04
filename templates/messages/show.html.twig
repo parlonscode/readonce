@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if message and message.deletedAt is null %}
+    {% if message %}
         {{ message.body }}
     {% else %}
         It seems like this message has been deleted.

@@ -1,5 +1,7 @@
+{% set link = url('app_messages_show', { uuid: message.uuid }) %}
+
 <h1>Hello friend!</h1>
 
 <p>You have a new read-once message!</p>
 
-<a href="https://google.com">https://google.com</a>
+<a href="{{ link }}">{{ link }}</a>
