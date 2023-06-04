@@ -11,10 +11,10 @@ class SoftDeleteableFilter extends SQLFilter
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
         // Check if the entity uses the SoftDeleteable trait
-        if (!in_array(SoftDeleteable::class, $targetEntity->reflClass->getTraitNames())) {
-            return "";
+        if (!in_array(SoftDeleteable::class, $targetEntity->getReflectionClass()->getTraitNames())) {
+            return '';
         }
 
-        return sprintf("%s.deleted_at is NULL", $targetTableAlias);
+        return sprintf('%s.deleted_at is NULL', $targetTableAlias);
     }
 }
