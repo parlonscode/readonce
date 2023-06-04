@@ -26,7 +26,7 @@ class MessagesController extends AbstractController
             // TODO: Save message in database
             // TODO: Send email
             // TODO: Redirect back with success message
-            
+
             dd('form handling');
         }
 
