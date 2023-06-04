@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\Timestampable;
 use App\Repository\MessageRepository;
+use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
@@ -20,6 +22,9 @@ class Message
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    private ?Uuid $uuid = null;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Email]
@@ -29,9 +34,26 @@ class Message
     #[Assert\NotBlank]
     private ?string $body = null;
 
+    public function __construct()
+    {
+        $this->setUuid(Uuid::v7());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(Uuid $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
     }
 
     public function getEmail(): ?string
