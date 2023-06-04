@@ -6,8 +6,8 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\Timestampable;
+use App\Entity\Trait\SoftDeleteable;
 use App\Repository\MessageRepository;
-use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class Message
 {
-    use Timestampable;
+    use Timestampable, SoftDeleteable;
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,9 +34,6 @@ class Message
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
     private ?string $body = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $deletedAt = null;
 
     public function getId(): ?int
     {
@@ -77,27 +74,5 @@ class Message
         $this->body = $body;
 
         return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    #[ORM\PreRemove]
-    public function setDeletedAtValue(PreRemoveEventArgs $eventArgs): void
-    {
-        $this->setDeletedAt(new \DateTimeImmutable);
-        
-        $em = $eventArgs->getObjectManager();
-        $em->persist($this);
-        $em->flush();
     }
 }
