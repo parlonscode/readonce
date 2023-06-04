@@ -29,7 +29,6 @@ class MessagesController extends AbstractController
             $messageRepository->save($message, flush: true);
 
             $email = (new TemplatedEmail)
-                ->from(new Address('hello@readonce.com', 'ReadOnce'))
                 ->to($message->getEmail())
                 ->subject('New read-once message!')
                 ->htmlTemplate('emails/message.html.twig')
