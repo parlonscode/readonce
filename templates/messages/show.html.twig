@@ -1,12 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul>
-        <li>ID: {{ message.id }}</li>
-        <li>UUID: {{ message.uuid }}</li>
-        <li>Email: {{ message.email }}</li>
-        <li>Body: {{ message.body }}</li>
-        <li>Created At: {{ message.createdAt|date }}</li>
-        <li>Updated At: {{ message.updatedAt|date }}</li>
-    </ul>
+    {% if message %}
+        {{ message.body }}
+    {% else %}
+        It seems like this message has been deleted.
+    {% endif %}
 {% endblock %}

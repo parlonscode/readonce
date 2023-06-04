@@ -16,6 +16,7 @@ class MessagesController extends AbstractController
     #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
     public function create(Request $request, MessageRepository $messageRepository): Response
     {
+        // dd($messageRepository->find(1));
         $message = new Message;
 
         $form = $this->createForm(MessageType::class, $message);
@@ -43,8 +44,14 @@ class MessagesController extends AbstractController
         name: 'app_messages_show',
         methods: ['GET']
     )]
-    public function show(Message $message): Response
+    public function show(string $uuid, MessageRepository $messageRepository): Response
     {
+        $message = $messageRepository->findOneByUuid($uuid);
+
+        if ($message) {
+            $messageRepository->remove($message, flush: true);
+        }
+
         return $this->render('messages/show.html.twig', compact('message'));
     }
 }
