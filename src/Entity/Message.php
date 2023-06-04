@@ -7,6 +7,7 @@ use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\Timestampable;
 use App\Repository\MessageRepository;
+use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -88,5 +89,15 @@ class Message
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    #[ORM\PreRemove]
+    public function setDeletedAtValue(PreRemoveEventArgs $eventArgs): void
+    {
+        $this->setDeletedAt(new \DateTimeImmutable);
+        
+        $em = $eventArgs->getObjectManager();
+        $em->persist($this);
+        $em->flush();
     }
 }

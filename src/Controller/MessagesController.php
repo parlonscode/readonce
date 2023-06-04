@@ -16,7 +16,7 @@ class MessagesController extends AbstractController
     #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
     public function create(Request $request, MessageRepository $messageRepository): Response
     {
-        dd($messageRepository->find(2));
+        dd($messageRepository->find(7));
         $message = new Message;
 
         $form = $this->createForm(MessageType::class, $message);
@@ -52,7 +52,7 @@ class MessagesController extends AbstractController
         ]);
 
         if ($message) {
-            $messageRepository->softRemove($message, flush: true);
+            $messageRepository->remove($message);
         }
 
         return $this->render('messages/show.html.twig', compact('message'));
