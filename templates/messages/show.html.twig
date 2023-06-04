@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if message %}
-        {{ message.body }}
-    {% else %}
-        It seems like this message has been deleted.
-    {% endif %}
+    <div class="text-center">
+        {% if message %}
+            <div class="p-3 bg-success text-success fst-italic bg-opacity-10 border border-success border-start-0 border-end-0">
+                <strong>{{ message.body }}</strong>
+            </div>
+        {% else %}
+            <div class="p-3 bg-danger text-danger fst-italic bg-opacity-10 border border-danger border-start-0 border-end-0">
+                <strong>It seems like this message has been deleted..</strong>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

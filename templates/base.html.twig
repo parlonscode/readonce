@@ -3,14 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <title>ReadOnce</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221em%22 font-size=%2296%22>1️⃣</text></svg>">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="container">
+        <div class="d-flex flex-column align-items-center justify-content-between">
+            <main role="main" class="mt-5 row w-100">
+                <div class="col-lg-6 mx-auto">
+                    {% block body %}{% endblock %}
+                </div>
+            </main>
+            
+            <footer class="mt-5">
+                {% if app.current_route == 'app_home' %}
+                    <p class="text-muted text-center">
+                      Built with <span class="text-danger">&hearts;</span> 
+                      by <a href="https://parlonscode.com">Parlons Code</a>.
+                    </p>
+                {% else %}
+                    <p class="text-center">
+                        <small>
+                            <a href="{{ path('app_home') }}" class="text-decoration-none fst-italic">
+                                Send your own read-one message to friends and family 👻
+                            </a>
+                        </small>
+                    </p>
+                {% endif %}
+            </footer>
+        </div>
     </body>
 </html>

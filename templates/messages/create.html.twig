@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>
-        The easiest way to send read-once messages to friends and family.
-    </h1>
+    <div class="card shadow">
+        <h1 class="card-header h5 text-center mb-0 text-muted">
+            Read-once messages to friends and family 👻
+        </h1>
+        <div class="card-body">
+            {{ include('partials/_success_flash_messages.html.twig') }}
 
-    {{ include('partials/_success_flash_messages.html.twig') }}
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-
-        <button type="submit" formnovalidate>Send Message</button>
-    {{ form_end(form) }}
+                <button type="submit" class="btn btn-secondary w-100" formnovalidate>
+                    Send Message
+                </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
