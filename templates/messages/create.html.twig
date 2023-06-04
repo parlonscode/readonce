@@ -5,6 +5,8 @@
         The easiest way to send read-once messages to friends and family.
     </h1>
 
+    {{ include('partials/_success_flash_messages.html.twig') }}
+
     {{ form_start(form) }}
         {{ form_widget(form) }}
 

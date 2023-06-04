@@ -25,9 +25,11 @@ class MessagesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $messageRepository->save($message, flush: true);
 
-            dd('done');
             // TODO: Send email
-            // TODO: Redirect back with success message
+            
+            $this->addFlash('success', 'Message sent successfully.');
+
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('messages/create.html.twig', compact('form'));
