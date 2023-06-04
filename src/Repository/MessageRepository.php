@@ -39,6 +39,16 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    public function softRemove(Message $entity, bool $flush = false): void
+    {
+        $entity->setDeletedAt(new \DateTimeImmutable);
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */
