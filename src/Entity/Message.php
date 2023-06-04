@@ -5,18 +5,19 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Trait\Timestampable;
-use App\Entity\Trait\SoftDeleteable;
+use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\MessageRepository;
 use Symfony\Bridge\Doctrine\Types\UuidType;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 #[ORM\Table(name: 'messages')]
-#[ORM\HasLifecycleCallbacks]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
 class Message
 {
-    use Timestampable, SoftDeleteable;
+    use TimestampableEntity, SoftDeleteableEntity;
     
     #[ORM\Id]
     #[ORM\GeneratedValue]

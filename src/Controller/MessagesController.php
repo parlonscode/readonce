@@ -49,7 +49,7 @@ class MessagesController extends AbstractController
         $message = $messageRepository->findOneByUuid($uuid);
 
         if ($message) {
-            $messageRepository->remove($message);
+            $messageRepository->remove($message, flush: true);
         }
 
         return $this->render('messages/show.html.twig', compact('message'));
