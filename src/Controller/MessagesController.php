@@ -8,6 +8,7 @@ use App\Repository\MessageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MessagesController extends AbstractController
@@ -30,5 +31,18 @@ class MessagesController extends AbstractController
         }
 
         return $this->render('messages/create.html.twig', compact('form'));
+    }
+
+    #[Route(
+        '/messages/{id}',
+        requirements: [
+            'id' => Requirement::POSITIVE_INT
+        ],
+        name: 'app_messages_show',
+        methods: ['GET']
+    )]
+    public function show(Message $message): Response
+    {
+        dd($message);
     }
 }
