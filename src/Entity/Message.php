@@ -34,6 +34,9 @@ class Message
     #[Assert\NotBlank]
     private ?string $body = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $deletedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +74,18 @@ class Message
     public function setBody(string $body): self
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeImmutable
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
