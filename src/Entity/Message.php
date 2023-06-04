@@ -34,11 +34,6 @@ class Message
     #[Assert\NotBlank]
     private ?string $body = null;
 
-    public function __construct()
-    {
-        $this->setUuid(Uuid::v7());
-    }
-
     public function getId(): ?int
     {
         return $this->id;
