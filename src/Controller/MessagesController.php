@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
+use App\Repository\MessageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MessagesController extends AbstractController
 {
     #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
-    public function create(Request $request): Response
+    public function create(Request $request, MessageRepository $messageRepository): Response
     {
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class)
@@ -23,11 +25,15 @@ class MessagesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO: Save message in database
+            $message = new Message;
+            $message->setEmail($form['email']->getData());
+            $message->setBody($form['body']->getData());
+
+            $messageRepository->save($message, flush: true);
+
+            dd('done');
             // TODO: Send email
             // TODO: Redirect back with success message
-
-            dd('form handling');
         }
 
         return $this->render('messages/create.html.twig', compact('form'));
