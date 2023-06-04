@@ -43,6 +43,6 @@ class MessagesController extends AbstractController
     )]
     public function show(Message $message): Response
     {
-        dd($message);
+        return $this->render('messages/show.html.twig', compact('message'));
     }
 }
