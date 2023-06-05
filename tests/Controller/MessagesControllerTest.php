@@ -95,6 +95,7 @@ class MessagesControllerTest extends WebTestCase
         $this->assertEmailTextBodyContains($email, 'You have a new read-once message!');
         $this->assertEmailTextBodyContains($email, "/messages/{$messageUuid}");
         $this->assertEmailAddressContains($email, 'sender', 'hello@readonce.com');
+        $this->assertEmailHeaderSame($email, 'To', 'johndoe@example.com');
     }
 
     /** @test */
