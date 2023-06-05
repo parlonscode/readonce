@@ -11,9 +11,6 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class MailerTest extends TestCase
 {
-    private $symfonyMailer;
-    private $mailer;
-
     /** @test **/
     public function sendReadOnceMessage_should_work_properly(): void
     {
