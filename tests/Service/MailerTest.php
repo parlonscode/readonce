@@ -17,15 +17,17 @@ class MailerTest extends TestCase
     public function sendReadOnceMessage_should_work_properly(): void
     {
         $symfonyMailer = $this->createMock(MailerInterface::class);
+
+        $symfonyMailer
+            ->expects($this->once())
+            ->method('send')
+        ;
+
         $mailer = new Mailer($symfonyMailer);
 
         $message = new Message;
         $message->setEmail('johndoe@example.com');
         $message->setBody('Hello from the other side!');
-
-        $symfonyMailer->expects($this->once())
-            ->method('send');
-
         $mailer->sendReadOnceMessage($message);
     }
 }
