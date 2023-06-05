@@ -1,20 +1,4 @@
-{% apply inline_css %}
-<style>
-    body {
-        margin: 20px;
-        padding: 0;
-        background-color: #f3f3f3;
-        border: 2px solid black;
-        text-align: center;
-    }
-
-    h1 {
-        background-color: blue;
-        padding: 30px 0;
-        color: white;
-    }
-</style>
-
+{% apply inline_css(source('@styles/email.css')) %}
 {% set link = url('app_messages_show', { uuid: message.uuid }) %}
 
 <h1>Hello friend!</h1>
