@@ -1,4 +1,4 @@
-# ReadOnce
+# ReadOnce 👻
 
 ReadOnce est une application permettant l'envoi de messages qui ne peuvent être lus
 qu'une seule fois. L'objectif est de fournir une plateforme sécurisée pour envoyer
