@@ -12,7 +12,7 @@ class Mailer
     {
     }
 
-    public function sendReadOnceMessage(Message $message): void
+    public function sendReadOnceMessage(Message $message): TemplatedEmail
     {
         $email = (new TemplatedEmail)
             ->to($message->getEmail())
@@ -21,5 +21,7 @@ class Mailer
             ->context(compact('message'))
         ;
         $this->mailer->send($email);
+
+        return $email;
     }
 }
